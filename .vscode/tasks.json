@@ -1,0 +1,51 @@
+{
+    "version": "0.1.0",  
+    "osx": {
+        "command": "bash",
+        "args": ["-c"],
+        "isShellCommand": true,
+        "showOutput": "always",
+        "suppressTaskName": true,
+        "options": {
+            "cwd": "${workspaceRoot}"
+        },
+        "tasks": [
+            {
+                "taskName": "blade",
+                "args": [
+                    "make blade"
+                ],
+                "isBuildCommand": true
+            },
+
+            {
+                "taskName": "clean",
+                "args": [
+                    "make clean"
+                ]
+            },
+
+            {
+                "taskName": "distclean",
+                "args": [
+                    "make distclean"
+                ]
+            }
+        ],
+        "problemMatcher": {
+            "owner": "cpp",
+            "fileLocation": [
+                "relative",
+                "${workspaceRoot}"
+            ],
+            "pattern": {
+                "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                "file": 1,
+                "line": 2,
+                "column": 3,
+                "severity": 4,
+                "message": 5
+            }
+        }
+    }
+}

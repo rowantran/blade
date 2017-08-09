@@ -2,11 +2,11 @@
 
 #include <string>
 
-struct SDL_Surface;
-struct SDL_PixelFormat;
+struct SDL_Texture;
+struct SDL_Renderer;
 
 /**
  * Loads the surface pointed to by path.
  * @return the surface loaded
  */
-SDL_Surface* loadSurface(std::string path, SDL_PixelFormat* format);
+SDL_Texture* loadTexture(SDL_Renderer* renderer, std::string path);

@@ -1,6 +1,5 @@
 # Ignore build files
-bin/
-build/
+cmake-build-debug/
 
 # Ignore Mac files
 .DS_Store

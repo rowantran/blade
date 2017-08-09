@@ -4,23 +4,21 @@
 #include "graphics.h"
 #include "sprite.h"
 
-Sprite::Sprite() {}
-
-Sprite::Sprite(std::string path, SDL_PixelFormat* format, int srcX, int srcY, int srcWidth, int srcHeight, int x, int y) {
+Sprite::Sprite(std::string path, SDL_Renderer* renderer, int srcX, int srcY, int srcWidth, int srcHeight, int x, int y) {
     SDL_Rect srcRect {srcX, srcY, srcWidth, srcHeight};
-    this->src = srcRect;
+    src = srcRect;
 
-    this->dest = Vector2(x, y);
-    this->surface = loadSurface(path, format); 
+    location = Vector2(x, y);
+    spritesheet = loadTexture(renderer, path); 
 }
 
 Sprite::~Sprite() {
-    SDL_FreeSurface(this->surface);
+    SDL_DestroyTexture(spritesheet);
 }
 
-void Sprite::update() {}
+void Sprite::update(float timeToUpdate) {}
 
-void Sprite::draw(SDL_Surface* surface) {
-    SDL_Rect destRect {this->dest.x, this->dest.y, this->src.w, this->src.h};
-    SDL_BlitSurface(this->surface, &this->src, surface, &destRect);
+void Sprite::draw(SDL_Renderer* renderer) {
+    SDL_Rect destRect {static_cast<int>(location.x), static_cast<int>(location.y), src.w, src.h};
+    SDL_RenderCopy(renderer, spritesheet, &src, &destRect);
 }

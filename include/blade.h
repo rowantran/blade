@@ -1,8 +1,9 @@
-#include "sprite.h"
+#include "player.h"
 
 class Blade {
     public:
         Blade();
+        ~Blade();
 
         /**
          * Begins the game loop. 
@@ -10,9 +11,9 @@ class Blade {
         void gameLoop();
     private:
         SDL_Window* window;
-        SDL_Surface* surface;
+        SDL_Renderer* renderer;
         
-        Sprite player;
+        Player player;
 
         bool running;
 

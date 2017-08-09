@@ -1,22 +1,27 @@
 #pragma once
 
+#include <SDL2/SDL.h>
+
+#include <string>
+
 #include "vector2.h"
 
-struct SDL_PixelFormat;
-struct SDL_Surface;
+struct SDL_Renderer;
+struct SDL_Texture;
 
 class Sprite {
     public:
-        Sprite();
-        Sprite(std::string path, SDL_PixelFormat* format, int srcX, int srcY, int srcWidth, int srcHeight, int x, int y);
+        Sprite(std::string path, SDL_Renderer* renderer, int srcX, int srcY, int srcWidth, int srcHeight, int x, int y);
 
-        ~Sprite();
+        virtual ~Sprite();
 
-        virtual void update();
-        void draw(SDL_Surface* surface);
+        virtual void update(float timeToUpdate);
+        void draw(SDL_Renderer* renderer);
 
-        Vector2 dest;
+    protected:
+        Vector2 location;
+        SDL_Texture* spritesheet;
+
     private:
         SDL_Rect src;
-        SDL_Surface* surface;
 };

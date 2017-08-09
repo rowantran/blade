@@ -5,20 +5,21 @@
 
 #include "graphics.h"
 
-SDL_Surface* loadSurface(std::string path, SDL_PixelFormat* format) {
-    SDL_Surface* origSurface = IMG_Load(path.c_str());
-    SDL_Surface* optimizedSurface = NULL;
+SDL_Texture* loadTexture(SDL_Renderer* renderer, std::string path) {
+    SDL_Surface* surface = IMG_Load(path.c_str());
+    SDL_Texture* texture = NULL;
 
-    if (origSurface == NULL) {
+    if (surface == NULL) {
         std::cout << "Could not load image " << path << "! Error: " << SDL_GetError() << std::endl;
     } else {
-        optimizedSurface = SDL_ConvertSurface(origSurface, format, NULL);
-        if (optimizedSurface == NULL) {
-            std::cout << "Could not optimize image! Error: " << SDL_GetError() << std::endl;
+        texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+        if (texture == NULL) {
+            std::cout << "Could not create texture! Error: " << SDL_GetError() << std::endl;
         }
 
-        SDL_FreeSurface(origSurface);
+        SDL_FreeSurface(surface);
     }
 
-    return optimizedSurface;
+    return texture;
 }
